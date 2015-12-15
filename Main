@@ -1,0 +1,206 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
+public class ExchangeGui extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldVl;
+	private JTextField textFieldAwns;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+
+
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ExchangeGui frame = new ExchangeGui();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+
+	double rate = 1.2;
+	int ratea, rateb;
+	private JTextField textFieldKursi;
+	public ExchangeGui() {
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		textFieldVl = new JTextField();
+		textFieldVl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {}
+		});
+		textFieldVl.setBounds(10, 82, 86, 20);
+		contentPane.add(textFieldVl);
+		textFieldVl.setColumns(10);
+
+		JLabel lblVlera = new JLabel("Vlera");
+		lblVlera.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVlera.setBounds(10, 57, 86, 14);
+		contentPane.add(lblVlera);
+
+		textFieldAwns = new JTextField();
+		textFieldAwns.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldAwns.setBounds(220, 82, 86, 20);
+		contentPane.add(textFieldAwns);
+		textFieldAwns.setColumns(10);
+
+		JLabel lblRezultati = new JLabel("Rezultati");
+		lblRezultati.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRezultati.setBounds(220, 57, 86, 14);
+		contentPane.add(lblRezultati);
+
+		JButton btnKonverto = new JButton("Konverto");
+		btnKonverto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				double vlera, awns;
+				try {
+
+					if (ratea == 0 && rateb == 0) {
+						rate = 1;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 0 && rateb == 1) {
+						rate = 0.9098;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 0 && rateb == 2) {
+						rate = 0.659917;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 0 && rateb == 3) {
+						rate = 125.463;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 1 && rateb == 0) {
+						rate = 1.09879;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 1 && rateb == 1) {
+						rate = 1;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 1 && rateb == 2) {
+						rate = 0.725079;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 1 && rateb == 3) {
+						rate = 137.857;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 2 && rateb == 0) {
+						rate = 1.51540;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 2 && rateb == 1) {
+						rate = 1.37896;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 2 && rateb == 2) {
+						rate = 1;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 2 && rateb == 3) {
+						rate = 190.139;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 3 && rateb == 0) {
+						rate = 0.00797046;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 3 && rateb == 1) {
+						rate = 0.00725191;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 3 && rateb == 2) {
+						rate = 0.00525899;
+						textFieldKursi.setText(Double.toString(rate));
+					} else if (ratea == 3 && rateb == 3) {
+						rate = 1;
+						textFieldKursi.setText(Double.toString(rate));
+					}
+
+
+					vlera = Double.parseDouble(textFieldVl.getText());
+					awns = vlera * rate;
+					textFieldAwns.setText(Double.toString(awns));
+
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Enter a Valid Number");
+				}
+			}
+		});
+		btnKonverto.setBounds(74, 188, 89, 23);
+		contentPane.add(btnKonverto);
+
+		JButton btnMbyll = new JButton("Mbyll");
+		btnMbyll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnMbyll.setBounds(241, 188, 89, 23);
+		contentPane.add(btnMbyll);
+
+		JLabel lblKursi = new JLabel("Kursi i Kembimit");
+		lblKursi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblKursi.setBounds(90, 57, 116, 14);
+		contentPane.add(lblKursi);
+		String[] x = {
+			"USD ", "Euro", "Pound", "Lek"
+		};
+
+		JComboBox comboBox = new JComboBox(x);
+
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				ratea = comboBox.getSelectedIndex();
+			}
+		});
+		comboBox.setBounds(106, 82, 86, 20);
+		contentPane.add(comboBox);
+
+		JLabel lblKursiIKembimit = new JLabel("Kursi i Kembimit");
+		lblKursiIKembimit.setHorizontalAlignment(SwingConstants.CENTER);
+		lblKursiIKembimit.setBounds(289, 57, 135, 14);
+		contentPane.add(lblKursiIKembimit);
+
+		JComboBox comboBox_1 = new JComboBox(x);
+
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				rateb = comboBox_1.getSelectedIndex();
+			}
+		});
+		comboBox_1.setBounds(316, 82, 80, 20);
+		contentPane.add(comboBox_1);
+
+		textFieldKursi = new JTextField();
+		textFieldKursi.setEditable(false);
+		textFieldKursi.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldKursi.setBounds(153, 26, 116, 20);
+		contentPane.add(textFieldKursi);
+		textFieldKursi.setColumns(10);
+
+		JLabel lblKursiIKembimit_1 = new JLabel("Kursi i Kembimit");
+		lblKursiIKembimit_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblKursiIKembimit_1.setBounds(153, 1, 117, 14);
+		contentPane.add(lblKursiIKembimit_1);
+	}
+}
